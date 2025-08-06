@@ -17,6 +17,7 @@ jobs:
       - name: build sources
         run: |
           mkdir ./output 
+          chmod +x test.sh
           cp test.sh ./output
 
       - name: stop yeem service
