@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: build sources
-        run: cp ./* ./output
+        run: mkdir ./output && cp ./* ./output
 
       - name: stop yeem service
         run: sudo systemctl stop yeem
