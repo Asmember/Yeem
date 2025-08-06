@@ -14,13 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: debug
+        run: |
+          whoami
+          which sudo
+
       - name: build sources
         run: |
           mkdir ./output 
           rsync -av --exclude='./output' ./* ./output
 
       - name: stop yeem service
-        run: sudo -u yeem sudo systemctl stop yeem
+        run: sudo systemctl stop yeem
 
       - name: delete old deployment
         run: rm -r /etc/yeem/*
