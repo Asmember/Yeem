@@ -1,0 +1,30 @@
+name: Deploy Dev Instance
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: 'dev'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: build sources
+        run: cp ./* ./output
+
+      - name: stop yeem service
+        run: sudo systemctl stop yeem
+
+      - name: delete old deployment
+        run: rm -r /etc/yeem/*
+
+      - name: Copy to dev dir
+        run: cp ./output/* /etc/yeem
+
+      - name: Start yeem service
+        run: sudo systemctl start yeem
