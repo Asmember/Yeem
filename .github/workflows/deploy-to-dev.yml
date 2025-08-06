@@ -20,7 +20,7 @@ jobs:
           rsync -av --exclude='./output' ./* ./output
 
       - name: stop yeem service
-        run: sudo systemctl stop yeem
+        run: sudo -u yeem sudo systemctl stop yeem
 
       - name: delete old deployment
         run: rm -r /etc/yeem/*
@@ -29,4 +29,4 @@ jobs:
         run: cp ./output/* /etc/yeem
 
       - name: Start yeem service
-        run: sudo systemctl start yeem
+        run: sudo -u yeem sudo systemctl start yeem
