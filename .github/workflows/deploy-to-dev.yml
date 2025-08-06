@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: build sources
-        run: mkdir ./output && cp -r ./!(output) ./output
+        run: |
+          mkdir ./output 
+          rsync -av --exclude='./output' ./* ./output
 
       - name: stop yeem service
         run: sudo systemctl stop yeem
